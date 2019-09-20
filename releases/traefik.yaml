@@ -14,13 +14,13 @@ spec:
     version: 1.78.2
   values:
     rbac:
-      enabled: "true"
+      enabled: true
     acme:
-      enabled: "true"
+      enabled: true
       challengeType: "http-01"
       email: "team@shabados.com"
-      staging: "false"
+      staging: false
     ssl:
-      enabled: "true"
-      enforced: "true"
-      permanentRedirect: "true"
+      enabled: true
+      enforced: true
+      permanentRedirect: true
