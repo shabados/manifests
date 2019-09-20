@@ -1,0 +1,24 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: kube-system
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~1
+spec:
+  releaseName: traefik
+  chart:
+    git: git@github.com:helm/charts
+    path: stable/traefik
+    ref: master
+  values:
+    acme:
+      enabled: "true"
+      challengeType: "tls-alpn-01"
+      email: "team@shabados.com"
+      staging: "false"
+    ssl:
+      enabled: "true"
+      enforced: "true"
+      permanentRedirect: "true"
