@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,20 +19,20 @@ spec:
         app: database-viewer
     spec:
       containers:
-        - image: shabados/database-viewer-frontend:122fbaa9eab824a7e4d8b8305d38895ad0516f71
-          name: database-viewer-frontend
-          ports:
-            - containerPort: 52526
-              name: http
-        - image: shabados/database-viewer-backend:122fbaa9eab824a7e4d8b8305d38895ad0516f71
-          name: database-viewer-backend
-          command: ["npm", "run", "start:production"]
-          env:
-            - name: PORT
-              value: "52526"
-          ports:
-            - containerPort: 80
-              name: http
+      - image: shabados/database-viewer-frontend:3001c1bc8c1f107956b358aa62abcc56e63ec51b
+        name: database-viewer-frontend
+        ports:
+        - containerPort: 52526
+          name: http
+      - image: shabados/database-viewer-backend:3001c1bc8c1f107956b358aa62abcc56e63ec51b
+        name: database-viewer-backend
+        command: ["npm", "run", "start:production"]
+        env:
+        - name: PORT
+          value: "52526"
+        ports:
+        - containerPort: 80
+          name: http
 ---
 apiVersion: v1
 kind: Service
