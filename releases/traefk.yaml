@@ -9,7 +9,7 @@ metadata:
 spec:
   releaseName: traefik
   chart:
-    repository: https://kubernetes-charts-incubator.storage.googleapis.com/
+    repository: https://kubernetes-charts.storage.googleapis.com/
     name: traefik
     version: 1.78.2
   values:
