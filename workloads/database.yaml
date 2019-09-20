@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+  namespace: shabad-os
+  labels:
+    app: database
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - image: shabados/database:4-mariadb
+        name: database
+        ports:
+        - containerPort: 3306
+          name: sql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: shabad-os
+spec:
+  selector:
+    app: database
+  ports:
+  - port: 3306
+    targetPort: 3306
