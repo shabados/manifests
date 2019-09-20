@@ -9,9 +9,9 @@ metadata:
 spec:
   releaseName: traefik
   chart:
-    git: git@github.com:helm/charts
+    repository: https://kubernetes-charts-incubator.storage.googleapis.com/
     path: stable/traefik
-    ref: master
+    version: 1.78.2
   values:
     acme:
       enabled: "true"
