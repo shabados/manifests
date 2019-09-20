@@ -16,6 +16,7 @@ spec:
     rbac:
       enabled: true
     acme:
+      logging: true
       enabled: true
       challengeType: "http-01"
       email: "team@shabados.com"
