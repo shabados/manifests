@@ -10,7 +10,7 @@ spec:
   releaseName: traefik
   chart:
     repository: https://kubernetes-charts-incubator.storage.googleapis.com/
-    name: stable/traefik
+    name: traefik
     version: 1.78.2
   values:
     acme:
