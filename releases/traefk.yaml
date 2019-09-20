@@ -17,7 +17,7 @@ spec:
       enabled: "true"
     acme:
       enabled: "true"
-      challengeType: "tls-alpn-01"
+      challengeType: "tls-http-01"
       email: "team@shabados.com"
       staging: "false"
     ssl:
