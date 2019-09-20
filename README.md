@@ -42,7 +42,7 @@ helm repo add fluxcd https://charts.fluxcd.io
 
 helm upgrade -i flux \
 --set helmOperator.create=true \
---set helmOperator.createCRD=false \
+--set helmOperator.createCRD=true \
 --set git.url=git@github.com:ShabadOS/manifests \
 --set git.user="Shabad OS Bot" \
 --set git.email="team@shabados.com" \
