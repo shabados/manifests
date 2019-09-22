@@ -23,5 +23,5 @@ spec:
       staging: false
     ssl:
       enabled: true
-      enforced: true
+      enforced: false
       permanentRedirect: true
