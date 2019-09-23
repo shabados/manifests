@@ -38,7 +38,7 @@ spec:
         - name: PORT
           value: "80"
         - name: KNEXFILE
-          volume: "/etc/config/knexfile.js"
+          value: "/etc/config/knexfile.js"
         ports:
         - containerPort: 80
           name: http
