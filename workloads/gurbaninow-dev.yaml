@@ -32,7 +32,7 @@ spec:
       - image: gurbaninow/api:bca4f0974dd0602db19edfddabf2afa680f78e3f
         name: api-backend--dev
         volumeMounts:
-        - name: knexfile-volume
+        - name: config-volume
           mountPath: /etc/config
         env:
         - name: PORT
