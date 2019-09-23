@@ -1,9 +1,9 @@
 ---
 apiVersion: v1
 data:
-  knexfile.js: "const config = {\n  client: 'mysql',\n  connection: {\n    host:
-    'database-service.shabad-os',\n    user: 'shabados',\n    database: 'shabados',\n
-    \ },\n  useNullAsDefault: true,\n}\n\nmodule.exports = config\n"
+  knexfile.js: "const config = {\n  client: 'mysql',\n  connection: {\n    host: 'database-service.shabad-os',\n\
+    \    user: 'shabados',\n    database: 'shabados',\n  },\n  useNullAsDefault: true,\n\
+    }\n\nmodule.exports = config\n"
 kind: ConfigMap
 metadata:
   name: api-config--dev
@@ -29,7 +29,7 @@ spec:
         app: api--dev
     spec:
       containers:
-      - image: gurbaninow/api:bca4f0974dd0602db19edfddabf2afa680f78e3f
+      - image: gurbaninow/api:6f8be4ee3ca6f5742245a0a5017869ced35f85f2
         name: api-backend--dev
         volumeMounts:
         - name: config-volume
@@ -43,9 +43,9 @@ spec:
         - containerPort: 80
           name: http
       volumes:
-        - name: config-volume
-          configMap:
-            name: api-config--dev
+      - name: config-volume
+        configMap:
+          name: api-config--dev
 ---
 apiVersion: v1
 kind: Service
