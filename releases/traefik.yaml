@@ -25,3 +25,6 @@ spec:
       enabled: true
       enforced: true
       permanentRedirect: true
+      tlsMinVersion: "VersionTLS10"
+      sniStrict: true
+      
