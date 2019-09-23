@@ -54,11 +54,16 @@ fluxcd/flux
 
 Install the [kubeseal CLI](https://github.com/bitnami-labs/sealed-secrets/releases).
 
-Then run:
+In the `secrets` directory run:
 
 ```
-# Create the secret as normal, but dry-run
-kubectl create secret generic mysecret --dry-run --from-file=foo=input-file -o json | kubeseal > secret.json
+kubectl -n shabad-os create secret generic \
+  secret-name \
+  --dry-run \
+  --from-file=input.json \
+  -o json > secret.tmp.json
+
+kubeseal --format=yaml -n shabad-os -- < secret.tmp.json > sealed-secret.yaml
 ```
 
 ## Helm Releases
