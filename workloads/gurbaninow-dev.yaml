@@ -1,4 +1,14 @@
 ---
+apiVersion: v1
+data:
+  knexfile.js: "const config = {\n  client: 'mysql',\n  connection: {\n    host:
+    'database-service.shabad-os',\n    user: 'shabados',\n    database: 'shabados',\n
+    \ },\n  useNullAsDefault: true,\n}\n\nmodule.exports = config\n"
+kind: ConfigMap
+metadata:
+  name: api-config--dev
+  namespace: gurbani-now
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,12 +31,21 @@ spec:
       containers:
       - image: gurbaninow/api:bca4f0974dd0602db19edfddabf2afa680f78e3f
         name: api-backend--dev
+        volumeMounts:
+        - name: knexfile-volume
+          mountPath: /etc/config
         env:
         - name: PORT
           value: "80"
+        - name: KNEXFILE
+          volume: "/etc/config/knexfile.js"
         ports:
         - containerPort: 80
           name: http
+      volumes:
+        - name: config-volume
+          configMap:
+            name: api-config---dev
 ---
 apiVersion: v1
 kind: Service
