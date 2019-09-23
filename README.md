@@ -50,9 +50,21 @@ helm upgrade -i flux \
 fluxcd/flux
 ```
 
+## Storing secrets
+
+Install the [kubeseal CLI](https://github.com/bitnami-labs/sealed-secrets/releases).
+
+Then run:
+
+```
+# Create the secret as normal, but dry-run
+kubectl create secret generic mysecret --dry-run --from-file=foo=input-file -o json | kubeseal > secret.json
+```
+
 ## Helm Releases
 
 - Traefik
+- Bitnami Sealed Secrets
 
 ## Workloads
 
