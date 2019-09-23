@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,14 +19,14 @@ spec:
         app: api--dev
     spec:
       containers:
-        - image: gurbaninow/api:5a440e64e21b6fffa9a41553e301c690a1096114
-          name: api-backend--dev
-          env:
-            - name: PORT
-              value: "80"
-          ports:
-            - containerPort: 80
-              name: http
+      - image: gurbaninow/api:bca4f0974dd0602db19edfddabf2afa680f78e3f
+        name: api-backend--dev
+        env:
+        - name: PORT
+          value: "80"
+        ports:
+        - containerPort: 80
+          name: http
 ---
 apiVersion: v1
 kind: Service
@@ -58,4 +59,4 @@ spec:
           serviceName: api-service--dev
           servicePort: backend
   tls:
-   - secretName: gurbaninow-tls-cert
+  - secretName: gurbaninow-tls-cert
