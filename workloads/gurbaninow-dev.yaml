@@ -29,7 +29,7 @@ spec:
         app: api--dev
     spec:
       containers:
-      - image: gurbaninow/api:2efe679b8363e863670229324577b5d5181e1fe1
+      - image: gurbaninow/api:8a264817bef4eee13544de0a53867bebc730f048
         name: api-backend--dev
         volumeMounts:
         - name: config-volume
