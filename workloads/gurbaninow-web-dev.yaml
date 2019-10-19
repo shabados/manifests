@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment--dev
+  namespace: gurbani-now
+  labels:
+    app: web--dev
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web--dev
+  template:
+    metadata:
+      labels:
+        app: web--dev
+    spec:
+      containers:
+      - image: gurbaninow/web:0e0c686892a1b7b732f81a7532b4c8f8dfb98891
+        name: web-backend--dev
+        ports:
+        - containerPort: 80
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service--dev
+  namespace: gurbani-now
+spec:
+  selector:
+    app: web--dev
+  ports:
+  - name: backend
+    port: 80
+    targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web--dev
+  namespace: gurbani-now
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: dev.gurbaninow.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-service--dev
+          servicePort: backend
+  tls:
+  - secretName: gurbaninow-tls-cert

@@ -76,4 +76,5 @@ kubeseal --format=yaml -n shabad-os -- < secret.tmp.json > sealed-secret.yaml
 - Shabad OS Website
 - Shabad OS Database Viewer
 - GurbaniNow Dev API
+- GurbaniNow Dev Website
 - Shabad OS Database MariaDB
