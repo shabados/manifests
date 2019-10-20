@@ -19,7 +19,7 @@ spec:
         app: web--dev
     spec:
       containers:
-      - image: gurbaninow/web:e44331a3bc04506028c38bc96d28e76584f76ef9
+      - image: gurbaninow/web:e826922607a0e5cc7760ce02f509cbe9cdcff729
         name: web-backend--dev
         ports:
         - containerPort: 80
