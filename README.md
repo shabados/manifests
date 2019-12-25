@@ -22,6 +22,13 @@ Create a namespace dedicated to running flux:
 kubectl create namespace flux
 ```
 
+### Add the Flux Custom Resource Definition
+
+Add the custom resource definition for Flux:
+```
+kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deploy-helm/flux-helm-release-crd.yaml
+```
+
 ### Install Flux
 
 Ensure Helm is [correctly installed](https://docs.fluxcd.io/en/stable/tutorials/get-started-helm.html#prerequisites).
