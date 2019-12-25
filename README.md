@@ -8,27 +8,18 @@ Flux will also update the images and Helm charts to the latest versions and push
 
 ## Cluster Setup
 
-Install Helm, install Flux with Helm, job done 😊.
+Install Helm, create a flux namespace, install Flux with Helm, job done 😊.
 
 ### Install Helm
 
-[Install and configure Helm](https://docs.fluxcd.io/en/stable/tutorials/get-started-helm.html#prerequisites) by creating a tiller service account, and deploying Helm using the [Helm CLI](https://helm.sh/docs/using_helm/#installing-helm).
+[Install the Helm CLI](https://docs.fluxcd.io/en/stable/tutorials/get-started-helm.html#prerequisites).
 
+### Create Flux namespace
 
-Set up the tiller service account:
+Create a namespace dedicated to running flux:
+
 ```
-# Create service account for tiller
-kubectl -n kube-system create sa tiller
-
-# Create admin rolebinding for tiller service account
-kubectl create clusterrolebinding tiller-cluster-rule \
-    --clusterrole=cluster-admin \
-    --serviceaccount=kube-system:tiller
-```
-
-Deploy Tiller:
-```
-helm init --skip-refresh --upgrade --service-account tiller
+kubectl create namespace flux
 ```
 
 ### Install Flux
