@@ -8,6 +8,8 @@ Flux will also update the images and Helm charts to the latest versions and push
 
 ## Cluster Setup
 
+*Note: Use **bash** to execute these commands*
+
 Install Helm, create a flux namespace, install Flux with Helm, job done 😊.
 
 ### Install Helm
@@ -20,13 +22,6 @@ Create a namespace dedicated to running flux:
 
 ```
 kubectl create namespace flux
-```
-
-### Add the Flux Custom Resource Definition
-
-Add the custom resource definition for Flux:
-```
-kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deploy-helm/flux-helm-release-crd.yaml
 ```
 
 ### Install Flux
@@ -46,6 +41,17 @@ helm upgrade -i flux \
 --set git.email="team@shabados.com" \
 --namespace flux \
 fluxcd/flux
+```
+
+### Install the Flux Helm Operator and Helm Custom Resource Definition
+
+Add the custom resource definition for Flux:
+```
+kubectl apply -f https://raw.githubusercontent.com/fluxcd/helm-operator/master/deploy/flux-helm-release-crd.yaml
+
+helm upgrade -i helm-operator fluxcd/helm-operator \
+--namespace flux \
+--set helm.version=v3
 ```
 
 ## Storing secrets
