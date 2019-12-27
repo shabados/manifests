@@ -16,6 +16,8 @@ Install Helm, create a flux namespace, install Flux with Helm, job done 😊.
 
 [Install the Helm CLI](https://docs.fluxcd.io/en/stable/tutorials/get-started-helm.html#prerequisites).
 
+On Windows: `choco install kubernetes-cli kubernetes-helm`
+
 ### Create Flux namespace
 
 Create a namespace dedicated to running flux:
@@ -54,6 +56,21 @@ helm upgrade -i helm-operator fluxcd/helm-operator \
 --set helm.versions=v3 \
 --set git.ssh.secretName=flux-git-deploy
 ```
+
+### Update the Sealed Secrets Public Key
+
+Install the [kubeseal CLI](https://github.com/bitnami-labs/sealed-secrets/releases).
+
+After the `sealed-secrets` chart has been spun up and deployed, retrieve and store the public key for the controller as `secrets/pub-cert.pem`, using the following command:
+
+```
+kubeseal --fetch-cert \
+--controller-name=my-release \
+--controller-namespace=my-release-namespace \
+> secrets/pub-cert.pem
+```
+
+Be sure to commit and push this to the repository.
 
 ## Storing secrets
 
