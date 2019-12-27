@@ -51,7 +51,8 @@ kubectl apply -f https://raw.githubusercontent.com/fluxcd/helm-operator/master/d
 
 helm upgrade -i helm-operator fluxcd/helm-operator \
 --namespace flux \
---set helm.version=v3
+--set helm.versions=v3 \
+--set git.ssh.secretName=flux-git-deploy
 ```
 
 ## Storing secrets
