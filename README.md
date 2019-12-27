@@ -65,8 +65,8 @@ After the `sealed-secrets` chart has been spun up and deployed, retrieve and sto
 
 ```
 kubeseal --fetch-cert \
---controller-name=my-release \
---controller-namespace=my-release-namespace \
+--controller-name=sealed-secrets \
+--controller-namespace=kube-system \
 > secrets/pub-cert.pem
 ```
 
