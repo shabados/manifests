@@ -89,13 +89,13 @@ Install the [kubeseal CLI](https://github.com/bitnami-labs/sealed-secrets/releas
 In the `secrets` directory run:
 
 ```
-kubectl -n shabad-os create secret generic \
+kubectl -n [NAMESPACE] create secret generic \
   secret-name \
   --dry-run \
   --from-file=input.json \
   -o json > secret.tmp.json
 
-kubeseal --format=yaml -n shabad-os -- < secret.tmp.json > sealed-secret.yaml
+kubeseal --format=yaml --controller-name=sealed-secrets -n [NAMESPACE] -- < secret.tmp.json > sealed-secret.yaml
 ```
 
 ## Helm Releases
