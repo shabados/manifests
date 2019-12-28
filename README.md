@@ -72,6 +72,8 @@ kubeseal --fetch-cert \
 
 Be sure to commit and push this to the repository.
 
+**Note: You must re-encrypt any secrets with the new sealed secrets public key.**
+
 ## Storing secrets
 
 Install the [kubeseal CLI](https://github.com/bitnami-labs/sealed-secrets/releases).
