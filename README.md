@@ -12,6 +12,14 @@ Flux will also update the images and Helm charts to the latest versions and push
 
 Install Helm, create a flux namespace, install Flux with Helm, job done 😊.
 
+### Create Kubernetes Dashboard Permissions
+
+Optional, if planning to use Kubernetes dashboard. This provides the correct permissions to the kubernetes dashboard account.
+
+```
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+```
+
 ### Install Helm
 
 [Install the Helm CLI](https://docs.fluxcd.io/en/stable/tutorials/get-started-helm.html#prerequisites).
