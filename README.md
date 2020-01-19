@@ -107,6 +107,8 @@ kubeseal --format=yaml --controller-name=sealed-secrets -n [NAMESPACE] -- < secr
 
 - Shabad OS Website
 - Shabad OS Database Viewer
+- Shabad OS Database on MariaDB
 - GurbaniNow Dev API
+- GurbaniNow Prod API
 - GurbaniNow Dev Website
-- Shabad OS Database MariaDB
+- GurbaniNow Prod Website
