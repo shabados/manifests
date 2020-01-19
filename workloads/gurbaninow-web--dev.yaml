@@ -2,25 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deployment--production
+  name: web-deployment--dev
   namespace: gurbani-now
   labels:
-    app: web--production
+    app: web--dev
   annotations:
     fluxcd.io/automated: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web--production
+      app: web--dev
   template:
     metadata:
       labels:
-        app: web--production
+        app: web--dev
     spec:
       containers:
-      - image: docker.pkg.github.com/gurbaninow/web/web-dev:0b35d25bce09fcc84b324f5c221738cf369ab19c
-        name: web-backend--production
+      - image: docker.pkg.github.com/gurbaninow/web/web:47728a350a4bed7289ab1d06d733b0ff3c6d7e3f
+        name: web-backend--dev
         ports:
         - containerPort: 80
           name: http
@@ -28,32 +28,32 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service--production
+  name: web-service--dev
   namespace: gurbani-now
 spec:
   selector:
-    app: web--production
+    app: web--dev
   ports:
   - name: backend
     port: 80
     targetPort: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: web--production
+  name: web--dev
   namespace: gurbani-now
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: gurbaninow.com
+  - host: dev.gurbaninow.com
     http:
       paths:
       - path: /
         backend:
-          serviceName: web-service--production
+          serviceName: web-service--dev
           servicePort: backend
   tls:
   - secretName: gurbaninow-tls-cert
