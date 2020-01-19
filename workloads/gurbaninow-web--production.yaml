@@ -19,7 +19,7 @@ spec:
         app: web--production
     spec:
       containers:
-      - image: docker.pkg.github.com/gurbaninow/web/web-dev:0b35d25bce09fcc84b324f5c221738cf369ab19c
+      - image: gurbaninow/web:85b6de14c4bad2f9cd3f6e8e45c0b9b1668c4917
         name: web-backend--production
         ports:
         - containerPort: 80
