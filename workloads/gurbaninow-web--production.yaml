@@ -19,7 +19,7 @@ spec:
         app: web--production
     spec:
       containers:
-      - image: gurbaninow/web:0a83af18e93f4488077bf03bdf95f5e5b793bc7e
+      - image: gurbaninow/web:8f86a0b4daad650b5fe7a1b546ee391cf4335407
         name: web-backend--production
         ports:
         - containerPort: 80
