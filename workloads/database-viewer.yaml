@@ -24,7 +24,7 @@ spec:
         ports:
         - containerPort: 52526
           name: http
-      - image: shabados/database-viewer-backend:3001c1bc8c1f107956b358aa62abcc56e63ec51b
+      - image: shabados/database-viewer-backend:d17a577bf8fbb1f5c8f5baed281af938092693fe
         name: database-viewer-backend
         command: ["npm", "run", "start:production"]
         env:
