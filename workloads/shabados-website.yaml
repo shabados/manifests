@@ -19,7 +19,7 @@ spec:
         app: website
     spec:
       containers:
-      - image: shabados/website:3669107f6d15e4b1eb458b96f340d3db9756c07b
+      - image: shabados/website:8ca3b27988c983499895bf0a8c6d60da72ea7eaf
         name: website
         ports:
         - containerPort: 80
