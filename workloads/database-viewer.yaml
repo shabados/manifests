@@ -34,7 +34,7 @@ spec:
               value: /var/auth/google/credentials.json
           volumeMounts:
             - mountPath: /var/auth/google
-              name: google-applications-credentials
+              name: google-application-credentials
           ports:
             - containerPort: 80
               name: http
