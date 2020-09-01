@@ -19,7 +19,7 @@ spec:
         app: database-viewer
     spec:
       containers:
-      - image: shabados/database-viewer-frontend:d0b6aff22ec1e486417197dae5b4f2b214ca8a4f
+      - image: shabados/database-viewer-frontend:933497d80c673c19d523ca1377ea4b4f41589c87
         name: database-viewer-frontend
         ports:
         - containerPort: 52526
