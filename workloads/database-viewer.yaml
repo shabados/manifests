@@ -19,20 +19,29 @@ spec:
         app: database-viewer
     spec:
       containers:
-      - image: shabados/database-viewer-frontend:d0b6aff22ec1e486417197dae5b4f2b214ca8a4f
-        name: database-viewer-frontend
-        ports:
-        - containerPort: 52526
-          name: http
-      - image: shabados/database-viewer-backend:d0b6aff22ec1e486417197dae5b4f2b214ca8a4f
-        name: database-viewer-backend
-        command: ["npm", "run", "start:production"]
-        env:
-        - name: PORT
-          value: "52526"
-        ports:
-        - containerPort: 80
-          name: http
+        - image: shabados/database-viewer-frontend:d0b6aff22ec1e486417197dae5b4f2b214ca8a4f
+          name: database-viewer-frontend
+          ports:
+            - containerPort: 52526
+              name: http
+        - image: shabados/database-viewer-backend:d0b6aff22ec1e486417197dae5b4f2b214ca8a4f
+          name: database-viewer-backend
+          command: ["npm", "run", "start:production"]
+          env:
+            - name: PORT
+              value: "52526"
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/auth/google/credentials.json
+          volumeMounts:
+            - mountPath: /var/auth/google
+              name: google-applications-credentials
+          ports:
+            - containerPort: 80
+              name: http
+      volumes:
+        - name: google-application-credentials
+          secret:
+            secretName: google-application-credentials.json
 ---
 apiVersion: v1
 kind: Service
@@ -43,12 +52,12 @@ spec:
   selector:
     app: database-viewer
   ports:
-  - name: backend
-    port: 52526
-    targetPort: 52526
-  - name: frontend
-    port: 80
-    targetPort: 80
+    - name: backend
+      port: 52526
+      targetPort: 52526
+    - name: frontend
+      port: 80
+      targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -60,14 +69,14 @@ metadata:
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: database.shabados.com
-    http:
-      paths:
-      - path: /api
-        backend:
-          serviceName: database-viewer-service
-          servicePort: backend
-      - path: /
-        backend:
-          serviceName: database-viewer-service
-          servicePort: frontend
+    - host: database.shabados.com
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: database-viewer-service
+              servicePort: backend
+          - path: /
+            backend:
+              serviceName: database-viewer-service
+              servicePort: frontend
