@@ -69,7 +69,7 @@ metadata:
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: database.shabados.com
+  - host: viewer.shabados.com
     http:
       paths:
       - path: /api
