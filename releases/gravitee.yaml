@@ -1,0 +1,43 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: graviteeio-apim3x
+  namespace: kube-system
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/chart-image: semver:~3
+spec:
+  releaseName: gravitee-apim
+  chart:
+    repository: https://helm.gravitee.io
+    name: graviteeio/apim3
+    version: 3.0.20
+  values:
+    gateway:
+      image:
+        tag: 3.5.2
+      ingress:
+        hosts:
+          - api.shabados.com
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          traefik.frontend.rule.type: PathPrefixStrip
+        tls:
+        
+    portal:
+      ingress:
+        hosts:
+          - api.shabados.com
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          traefik.frontend.rule.type: PathPrefixStrip
+        tls:
+
+    ui:
+      ingress:
+        hosts:
+          - api.shabados.com
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          traefik.frontend.rule.type: PathPrefixStrip
+        tls:

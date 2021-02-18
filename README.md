@@ -102,6 +102,7 @@ kubeseal --format=yaml --controller-name=sealed-secrets -n [NAMESPACE] -- < secr
 
 - Traefik
 - Bitnami Sealed Secrets
+- Gravitee API Management
 
 ## Workloads
 
