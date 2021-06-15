@@ -8,7 +8,7 @@ metadata:
     app: database
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.database: regexp:^(4\.\d*\.\d*-mariadb)$
+    fluxcd.io/tag.database: regexp:^(4\.7\.\d*-mariadb)$
 spec:
   replicas: 1
   selector:
@@ -20,7 +20,7 @@ spec:
         app: database
     spec:
       containers:
-      - image: shabados/database:4.8.0-mariadb
+      - image: shabados/database:4.7.0-mariadb
         name: database
         ports:
         - containerPort: 3306
