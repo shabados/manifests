@@ -7,7 +7,6 @@ metadata:
   labels:
     app: database
   annotations:
-    fluxcd.io/automated: "true"
     fluxcd.io/tag.database: regexp:^(4\.\d*\.\d*-mariadb)$
 spec:
   replicas: 1
