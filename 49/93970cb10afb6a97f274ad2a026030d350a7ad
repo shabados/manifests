@@ -1,0 +1,1 @@
+{"jobID":"65e61771-1330-cff0-cd96-adf3bb9b1278","spec":{"type":"policy","cause":{"Message":"","User":"Harjot Singh \u003charjot@harkul.com\u003e"},"spec":{"shabad-os:deployment/database-deployment":{"add":{"automated":"true"},"remove":{}}}},"result":null}
