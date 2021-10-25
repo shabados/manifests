@@ -20,12 +20,12 @@ spec:
         app: database-viewer--production
     spec:
       containers:
-      - image: ghcr.io/shabados/database-viewer-frontend:v1.4.2
+      - image: ghcr.io/shabados/database-viewer-frontend:v1.5.1-next.0
         name: database-viewer-frontend--production
         ports:
         - containerPort: 52526
           name: http
-      - image: ghcr.io/shabados/database-viewer-backend:v1.4.2
+      - image: ghcr.io/shabados/database-viewer-backend:v1.5.1-next.0
         name: database-viewer-backend--production
         command: ["npm", "run", "start:production"]
         env:
