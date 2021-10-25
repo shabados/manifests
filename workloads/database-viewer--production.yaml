@@ -20,12 +20,12 @@ spec:
         app: database-viewer--production
     spec:
       containers:
-      - image: shabados/database-viewer-frontend:v1.4.3-next.2
+      - image: shabados/database-viewer-frontend:v1.4.2
         name: database-viewer-frontend--production
         ports:
         - containerPort: 52526
           name: http
-      - image: shabados/database-viewer-backend:v1.4.3-next.2
+      - image: shabados/database-viewer-backend:v1.4.2
         name: database-viewer-backend--production
         command: ["npm", "run", "start:production"]
         env:
