@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-viewer-deployment--production
+  namespace: shabad-os
+  labels:
+    app: database-viewer--production
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.database-viewer--production: regexp:^(v\d*\.\d*\.\d*)$
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-viewer--production
+  template:
+    metadata:
+      labels:
+        app: database-viewer--production
+    spec:
+      containers:
+      - image: shabados/database-viewer-frontend:v1.4.3-next.2
+        name: database-viewer-frontend--production
+        ports:
+        - containerPort: 52526
+          name: http
+      - image: shabados/database-viewer-backend:v1.4.3-next.2
+        name: database-viewer-backend--production
+        command: ["npm", "run", "start:production"]
+        env:
+        - name: PORT
+          value: "52526"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/auth/google/credentials.json
+        volumeMounts:
+        - mountPath: /var/auth/google
+          name: google-application-credentials
+        ports:
+        - containerPort: 80
+          name: http
+      volumes:
+      - name: google-application-credentials
+        secret:
+          secretName: google-application-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-viewer-service--production
+  namespace: shabad-os
+spec:
+  selector:
+    app: database-viewer--production
+  ports:
+  - name: backend
+    port: 52526
+    targetPort: 52526
+  - name: frontend
+    port: 80
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: database-viewer-ingress--production
+  namespace: shabad-os
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: viewer.dev.shabados.com
+    http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: database-viewer-service--production
+          servicePort: backend
+      - path: /
+        backend:
+          serviceName: database-viewer-service--production
+          servicePort: frontend

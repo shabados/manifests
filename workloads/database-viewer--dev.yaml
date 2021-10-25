@@ -2,30 +2,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: database-viewer-deployment
+  name: database-viewer-deployment--dev
   namespace: shabad-os
   labels:
-    app: database-viewer
+    app: database-viewer--dev
   annotations:
     fluxcd.io/automated: "true"
+    fluxcd.io/tag.database-viewer--dev: regexp:^(v\d*\.\d*\.\d*-next\.\d*)$
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: database-viewer
+      app: database-viewer--dev
   template:
     metadata:
       labels:
-        app: database-viewer
+        app: database-viewer--dev
     spec:
       containers:
       - image: shabados/database-viewer-frontend:v1.4.3-next.2
-        name: database-viewer-frontend
+        name: database-viewer-frontend--dev
         ports:
         - containerPort: 52526
           name: http
       - image: shabados/database-viewer-backend:v1.4.3-next.2
-        name: database-viewer-backend
+        name: database-viewer-backend--dev
         command: ["npm", "run", "start:production"]
         env:
         - name: PORT
@@ -46,11 +47,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: database-viewer-service
+  name: database-viewer-service--dev
   namespace: shabad-os
 spec:
   selector:
-    app: database-viewer
+    app: database-viewer--dev
   ports:
   - name: backend
     port: 52526
@@ -62,21 +63,21 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: database-viewer-ingress
+  name: database-viewer-ingress--dev
   namespace: shabad-os
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: viewer.shabados.com
+  - host: viewer.dev.shabados.com
     http:
       paths:
       - path: /api
         backend:
-          serviceName: database-viewer-service
+          serviceName: database-viewer-service--dev
           servicePort: backend
       - path: /
         backend:
-          serviceName: database-viewer-service
+          serviceName: database-viewer-service--dev
           servicePort: frontend
