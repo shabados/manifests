@@ -2,31 +2,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: database-viewer-deployment--dev
+  name: database-viewer-deployment--next
   namespace: shabad-os
   labels:
-    app: database-viewer--dev
+    app: database-viewer--next
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.database-viewer--dev: regexp:^(v\d*\.\d*\.\d*-next\.\d*)$
+    fluxcd.io/tag.database-viewer--next: regexp:^(v\d*\.\d*\.\d*-next\.\d*)$
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: database-viewer--dev
+      app: database-viewer--next
   template:
     metadata:
       labels:
-        app: database-viewer--dev
+        app: database-viewer--next
     spec:
       containers:
       - image: ghcr.io/shabados/database-viewer-frontend:v1.5.1-next.0
-        name: database-viewer-frontend--dev
+        name: database-viewer-frontend--next
         ports:
         - containerPort: 52526
           name: http
       - image: ghcr.io/shabados/database-viewer-backend:v1.5.1-next.0
-        name: database-viewer-backend--dev
+        name: database-viewer-backend--next
         command: ["npm", "run", "start:production"]
         env:
         - name: PORT
@@ -47,11 +47,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: database-viewer-service--dev
+  name: database-viewer-service--next
   namespace: shabad-os
 spec:
   selector:
-    app: database-viewer--dev
+    app: database-viewer--next
   ports:
   - name: backend
     port: 52526
@@ -63,7 +63,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: database-viewer-ingress--dev
+  name: database-viewer-ingress--next
   namespace: shabad-os
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -75,9 +75,9 @@ spec:
       paths:
       - path: /api
         backend:
-          serviceName: database-viewer-service--dev
+          serviceName: database-viewer-service--next
           servicePort: backend
       - path: /
         backend:
-          serviceName: database-viewer-service--dev
+          serviceName: database-viewer-service--next
           servicePort: frontend
