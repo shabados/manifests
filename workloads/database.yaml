@@ -20,7 +20,7 @@ spec:
         app: database
     spec:
       containers:
-      - image: shabados/database:4.7.17-mariadb
+      - image: shabados/database:4.7.18-mariadb
         name: database
         ports:
         - containerPort: 3306
